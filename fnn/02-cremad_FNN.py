@@ -26,8 +26,7 @@ from sklearn.preprocessing import LabelEncoder
 
 from transformers import BertTokenizer, BertForSequenceClassification
 
-with open('cnn_model2.pkl', 'rb') as file:
-# with open('C:\\repos\\CS4100FinalProject\\cnn\\audio_cnn.pkl', 'rb') as file:
+with open('C:\\repos\\CS4100FinalProject\\cnn\\audio_cnn.pkl', 'rb') as file:
     cnn_model = pickle.load(file)
 
 crema_data = pd.read_csv('C:\\repos\\CS4100FinalProject\\fnn\\cremad_feature_extraction.csv')
