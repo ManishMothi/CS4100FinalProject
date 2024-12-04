@@ -9,6 +9,9 @@ This repository contains two main components:
 
 ### Prerequisites
 
+We use python 3.10:
+brew install python@3.10
+
 #### Python Environments
 
 You need two separate Python virtual environments:
@@ -20,16 +23,18 @@ Create the environments as follows:
 
 ##### Training Environment:
 
-    python3 -m venv training_env
+    python3.10 -m venv training_env
     source training_env/bin/activate  # On Windows: training_env\Scripts\activate
     pip install -r requirements.txt
+    deactivate
 
 ##### Backend Environment:
 
     cd app/backend
-    python3 -m venv backend_env
+    python3.10 -m venv backend_env
     source backend_env/bin/activate  # On Windows: backend_env\Scripts\activate
     pip install -r requirements.txt
+    deactivate
 
 ##### Frontend Setup:
 
@@ -42,18 +47,18 @@ Create the environments as follows:
 
 ### Step 1: Audio Convolutional Neural Network (CNN)
 
-#### Feature Extraction: Extract audio features from the RAVDESS emotion audio dataset (takes a ~5 minutes to complete)
+#### Feature Extraction: Extract audio features from the RAVDESS emotion audio dataset (takes a ~10-15 minutes to complete)
 
     source training_env/bin/activate  # Activate the training environment
     python cnn/ravdess_feat_extraction.py
 
 ### Step 2: Fusion Feed-Forward Neural Network (FNN)
 
-#### Feature Extraction: Extract features from the CREMA-D dataset (5-10 minutes to complete)
+#### Feature Extraction: Extract features from the CREMA-D dataset (10-15 minutes to complete)
 
     python fnn/01-cremad_feat_extraction.py
 
-#### Train the FNN (~10 minutes to complete):
+#### Train the FNN (~10-20 minutes to complete):
 
     python fnn/02-cremad_FNN.py
     deactivate
@@ -105,6 +110,8 @@ Open your browser and go to:
     └── requirements.txt          # Python dependencies for training
 
 ---
+
+The cnn/ravdess_CNN.py file is the architecture of the CNN and is trained using extracted audio features from the RAVDESS dataset
 
 ## Notes
 

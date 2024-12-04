@@ -1,11 +1,11 @@
-myvenv/
+training_env/
 
 app/.vscode/
 
 ### Backend: 
 
 app/backend/__pycache__
-app/backend/venv
+app/backend/backend_env
 
 ### Frontend: 
 
