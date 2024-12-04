@@ -264,7 +264,7 @@ class FNN(nn.Module):
 
 feedforward_net = FNN()
 criterion = nn.CrossEntropyLoss()
-optimizer_fnn = torch.optim.Adam(feedforward_net.parameters(), lr=0.001)
+optimizer_fnn = torch.optim.Adam(feedforward_net.parameters(), lr=0.005)
 
 
 loss_values_fnn = []   # loss for each epoch 
