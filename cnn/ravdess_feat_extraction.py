@@ -2,10 +2,15 @@ import opensmile
 import pandas as pd
 import os
 
-# paths to the dataset and output csv
-dataset_dir = "C:\\repos\\CS4100FinalProject\\cnn\\RAVDESS"  # path where RAVDESS dataset is located
-output_csv = "cnn\\ravdess_feature_extraction.csv"   
+# Base directory starting from 'cnn'
+base_dir = "cnn"
 
+# Paths for dataset directory and output CSV
+dataset_dir = os.path.join(base_dir, "RAVDESS")  # Path where RAVDESS dataset is located
+output_csv = os.path.join(base_dir, "ravdess_feature_extraction.csv")  # Path for the output CSV
+
+print(dataset_dir)
+print(output_csv)
 
 # initializing the OpenSMILE feature extractor
 # using eGeMAPSv02 feature set and functionals feature level, useful for emotion recognition
@@ -52,11 +57,18 @@ for root, _, files in os.walk(dataset_dir):
             audio_features.append(features)
 
 
-features_df = pd.concat(audio_features, ignore_index=True)
-features_df.to_csv(output_csv, index=False)
-print(f"Feature extraction of RAVDESS Dataset complete and saved to {output_csv}")
 
+# Combine all extracted features into a DataFrame
+if audio_features: 
+    features_df = pd.concat(audio_features, ignore_index=True)
+    features_df.to_csv(output_csv, index=False)
+    print(f"Feature extraction of RAVDESS dataset complete and saved to {output_csv}")
+else:
+    print("No audio features extracted. Please check the dataset directory.")
 
-df = pd.read_csv("cnn\\ravdess_feature_extraction.csv")
-
-print(df.head())
+# Load the saved CSV to confirm the data
+if os.path.exists(output_csv):
+    df = pd.read_csv(output_csv)
+    print(df.head())
+else:
+    print(f"CSV file {output_csv} not found. Extraction may have failed.")

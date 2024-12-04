@@ -2,8 +2,10 @@ import opensmile
 import pandas as pd
 import os
 
-dataset_dir = "C:\\repos\\CS4100FinalProject\\fnn\\CREMA-D"  # path to CREMA-D dataset within repo 
-output_csv = "C:\\repos\\CS4100FinalProject\\fnn\\cremad_feature_extraction.csv"  # csv file output for CREMA-D features
+base_dir = "fnn"
+
+dataset_dir = os.path.join(base_dir, "CREMA-D")  
+output_csv = os.path.join(base_dir, "cremad_feature_extraction.csv") 
 
 
 smile = opensmile.Smile(

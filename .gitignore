@@ -1,4 +1,49 @@
-tensorflow_env/
-venv/
-crema_data/
-ffn.pth
+myvenv/
+
+app/.vscode/
+
+### Backend: 
+
+app/backend/__pycache__
+app/backend/venv
+
+### Frontend: 
+
+# dependencies
+app/frontend/node_modules
+app/frontend/.pnp
+app/frontend.pnp.*
+app/frontend.yarn/*
+!app/frontend.yarn/patches
+!app/frontend.yarn/plugins
+!app/frontend.yarn/releases
+!app/frontend.yarn/versions
+
+# testing
+app/frontend/coverage
+
+# next.js
+app/frontend/.next/
+app/frontend/out/
+
+# production
+app/frontend/build
+
+# misc
+app/frontend/.DS_Store
+app/frontend/*.pem
+
+# debug
+app/frontend/npm-debug.log*
+app/frontend/yarn-debug.log*
+app/frontend/yarn-error.log*
+
+# env files (can opt-in for committing if needed)
+app/frontend/.env*
+
+# vercel
+app/frontend/.vercel
+
+# typescript
+app/frontend/*.tsbuildinfo
+app/frontend/next-env.d.ts

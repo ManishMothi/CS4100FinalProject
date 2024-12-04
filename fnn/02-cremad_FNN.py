@@ -26,11 +26,11 @@ from sklearn.preprocessing import LabelEncoder
 
 from transformers import BertTokenizer, BertForSequenceClassification
 
-with open('C:\\repos\\CS4100FinalProject\\cnn\\audio_cnn.pkl', 'rb') as file:
+with open(os.path.join("cnn", "audio_cnn.pkl"), 'rb') as file:
     cnn_model = pickle.load(file)
 
-crema_data = pd.read_csv('C:\\repos\\CS4100FinalProject\\fnn\\cremad_feature_extraction.csv')
-ravdess_data = pd.read_csv('C:\\repos\\CS4100FinalProject\\cnn\\ravdess_feature_extraction.csv')
+crema_data = pd.read_csv(os.path.join("fnn", "cremad_feature_extraction.csv"))
+ravdess_data = pd.read_csv(os.path.join("cnn", "ravdess_feature_extraction.csv"))
 
 X = crema_data.drop(columns=['filename', 'emotion', 'sentence','speaker_id'])
 y = crema_data['emotion']
@@ -174,11 +174,12 @@ def logarithmic_normalization(vector):
 crema_data['normalized_combined_vector'] = crema_data['combined_vector'].apply(logarithmic_normalization)
 crema_extracted_df = crema_data[['ListBig5', 'cnn_predictions', 'combined_vector', 'ground_truths_balanced', 'normalized_combined_vector']]
 crema_extracted_df.shape
-crema_extracted_df.to_csv('C:\\repos\\CS4100FinalProject\\fnn\\cremad_extracted_df.csv', index=False)
+crema_extracted_df.to_csv(os.path.join("fnn", "cremad_extracted_df.csv"), index=False)
 
 # crema_extracted_df['ground_truths'].value_counts()
 crema_extracted_df['ground_truths_balanced'].value_counts()
-crema_model_df = pd.read_csv('C:\\repos\\CS4100FinalProject\\fnn\\cremad_extracted_df.csv')
+
+crema_model_df = pd.read_csv(os.path.join("fnn", "cremad_extracted_df.csv"))
 crema_model_df 
 
 fnn_df = crema_model_df[['normalized_combined_vector', 'ground_truths_balanced']]
@@ -296,15 +297,16 @@ for epoch in range(25):  # loop over the dataset multiple times
 
 print('Finished Training')
 
-torch.save(feedforward_net.state_dict(), 'C:\\repos\\CS4100FinalProject\\fnn\\fnn.pth')  # Saves model file (upload with submission)
 
-with open('C:\\repos\\CS4100FinalProject\\fnn\\loss_values_fnn.pkl', 'wb') as f:
+torch.save(feedforward_net.state_dict(), os.path.join("fnn", "fnn.pth"))  # Saves model file (upload with submission)
+
+with open(os.path.join("fnn", "loss_values_fnn.pkl"), 'wb') as f:
     pickle.dump(loss_values_fnn, f)
 
 
 
 
-feedforward_net.load_state_dict(torch.load('C:\\repos\\CS4100FinalProject\\fnn\\fnn.pth'))
+feedforward_net.load_state_dict(torch.load(os.path.join("fnn", "fnn.pth")))
 
 correct_ffn = 0
 total_ffn = 0
@@ -340,7 +342,7 @@ def plot_loss(loss_history, model):
     plt.show()
 
 
-with open('C:\\repos\\CS4100FinalProject\\fnn\\loss_values_fnn.pkl', 'rb') as f:
+with open(os.path.join("fnn", "loss_values_fnn.pkl"), 'rb') as f:
     loss_values_fnn = pickle.load(f)
 
 
