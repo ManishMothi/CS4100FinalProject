@@ -2,15 +2,11 @@ import opensmile
 import pandas as pd
 import os
 
-# Base directory starting from 'cnn'
+
 base_dir = "cnn"
 
-# Paths for dataset directory and output CSV
 dataset_dir = os.path.join(base_dir, "RAVDESS")  # Path where RAVDESS dataset is located
 output_csv = os.path.join(base_dir, "ravdess_feature_extraction.csv")  # Path for the output CSV
-
-print(dataset_dir)
-print(output_csv)
 
 # initializing the OpenSMILE feature extractor
 # using eGeMAPSv02 feature set and functionals feature level, useful for emotion recognition

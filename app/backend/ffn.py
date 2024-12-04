@@ -1,6 +1,7 @@
 import numpy as np
 import torch
 from ffn_class import FFN
+import os 
 
 '''
 Mapping of MBTI type to numerical value for model. 
@@ -35,8 +36,12 @@ def ffn_workflow(big5, emotion_scores):
     combined_list = np.concatenate((personality_list_normalized, emotion_list_normalized))
 
 
+    current_file_path = os.path.abspath(__file__)
+    file_path = os.path.join(os.path.dirname(current_file_path), '..', '..', 'fnn', 'fnn.pth')
+    file_path = os.path.abspath(file_path)
+
     model = FFN()
-    model.load_state_dict(torch.load('models/ffn.pth'))
+    model.load_state_dict(torch.load(file_path))
     model.eval()
 
     input_tensor = torch.from_numpy(combined_list).float()

@@ -6,11 +6,12 @@ import numpy as np
 import matplotlib.pyplot as plt
 import tensorflow as tf
 from tensorflow.keras import layers, models
+import os 
 import pickle
 
 
-# preprocessing
-data = pd.read_csv('cnn\\ravdess_feature_extraction.csv')
+base_dir = "cnn"
+data = pd.read_csv(os.path.join(base_dir, "ravdess_feature_extraction.csv"))
 
 X = data.drop(columns=['filename', 'emotion'])
 y = data['emotion']
@@ -71,7 +72,7 @@ emotion_labels = label_encoder.classes_  # getting original class labels
 model.summary()
 
 
-with open('cnn\\audio_cnn_FAKE.pkl', 'wb') as file:
+with open('cnn/audio_cnn.pkl', 'wb') as file:
     pickle.dump(model, file)
 
 print("Model saved successfully as audio_cnn.pkl")

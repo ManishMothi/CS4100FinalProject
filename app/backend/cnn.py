@@ -30,7 +30,11 @@ def cnn_workflow(filename):
 
     features = smile.process_file(audio_file)
 
-    with open('models/cnn_model.pkl', 'rb') as file:
+    current_file_path = os.path.abspath(__file__)
+    file_path = os.path.join(os.path.dirname(current_file_path), '..', '..', 'cnn', 'audio_cnn.pkl')
+    file_path = os.path.abspath(file_path)
+
+    with open(file_path, 'rb') as file:
         model = pickle.load(file)
 
     scaler = StandardScaler()
